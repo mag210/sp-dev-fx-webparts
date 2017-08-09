@@ -16,7 +16,7 @@ export default class LatestOrdersWebPart extends BaseClientSideWebPart<ILatestOr
   public render(): void {
     this.domElement.innerHTML = `
     <div class="${styles.latestOrders}">
-      <iframe src="https://localhost:44342"
+      <iframe src="https://azure-ad-demo.neptune-preprod.bris.ac.uk/secure/user"
           style="display:none;"></iframe>
       <div class="ms-font-xxl">Recent orders</div>
       <div class="loading"></div>
@@ -46,12 +46,13 @@ export default class LatestOrdersWebPart extends BaseClientSideWebPart<ILatestOr
     });
 
     this.executeOrDelayUntilRemotePartyLoaded((): void => {
-      this.context.httpClient.get("https://localhost:44342/api/orders",
+      this.context.httpClient.get("https://azure-ad-demo.neptune-preprod.bris.ac.uk/secure/user",
         HttpClient.configurations.v1, {
           credentials: "include"
         })
         .then((response: HttpClientResponse): Promise<IOrder[]> => {
           if (response.ok) {
+            console.log(response) ;
             return response.json();
           } else {
             return Promise.resolve(null);
@@ -70,6 +71,9 @@ export default class LatestOrdersWebPart extends BaseClientSideWebPart<ILatestOr
         });
     });
   }
+
+
+
 
     private renderData(): void {
         if (this.orders) {
