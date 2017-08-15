@@ -32,7 +32,7 @@ export default class SpPnPJsCrudWebPart extends BaseClientSideWebPart<ISpPnPJsCr
       <div class="ms-Grid-row ms-bgColor-themeDark ms-fontColor-white ${styles.row}">
         <div class="ms-Grid-col ms-u-lg10 ms-u-xl8 ms-u-xlPush2 ms-u-lgPush1">
           <span class="ms-font-xl ms-fontColor-white">
-            Sample SharePoint CRUD operations using the SP PnP JS library
+            Test SharePoint CRUD operations using the SP PnP JS library
           </span>
         </div>
       </div>

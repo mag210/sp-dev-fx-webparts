@@ -18,24 +18,8 @@ export default class LatestOrdersWebPart extends BaseClientSideWebPart<ILatestOr
     <div class="${styles.latestOrders}">
       <iframe src="https://azure-ad-demo.neptune-preprod.bris.ac.uk/secure/user"
           style="display:none;"></iframe>
-      <div class="ms-font-xxl">Recent orders</div>
+      <div class="ms-font-xxl">Username</div>
       <div class="loading"></div>
-      <table class="data" style="display:none;">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Date</th>
-            <th>Region</th>
-            <th>Rep</th>
-            <th>Item</th>
-            <th>Units</th>
-            <th>Unit cost</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
     </div>`;
 
     this.context.statusRenderer.displayLoadingIndicator(
@@ -50,23 +34,29 @@ export default class LatestOrdersWebPart extends BaseClientSideWebPart<ILatestOr
         HttpClient.configurations.v1, {
           credentials: "include"
         })
-        .then((response: HttpClientResponse): Promise<IOrder[]> => {
-          if (response.ok) {
-            console.log(response) ;
+        .then((response: HttpClientResponse): Promise<any> => {
+          
+            //console.log(response.text()) ;
+
             return response.json();
-          } else {
-            return Promise.resolve(null);
-          }
+            
+          
         })
-        .then((orders: IOrder[]): void => {
-          this.orders = orders;
-          this.context.statusRenderer.clearLoadingIndicator(
-            this.domElement.querySelector(".loading"));
-          this.renderData();
+        .then((user: any): void => {
+          console.log(user) ;
+          //var username = user.split(":'")[1].split("'}")[0] ;
+          var username = user.userid ;
+          
+          //this.user = user;
+            this.context.statusRenderer.clearLoadingIndicator(
+            this.domElement.querySelector(".loading").innerHTML = username);
+          //this.renderData();
         })
         .catch((error: any): void => {
+
           this.context.statusRenderer.clearLoadingIndicator(
             this.domElement.querySelector(".loading"));
+            //console.log(user) ;
           this.context.statusRenderer.renderError(this.domElement, "Error loading orders: " + (error ? error.message : ""));
         });
     });

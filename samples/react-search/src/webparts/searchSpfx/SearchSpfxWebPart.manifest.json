@@ -16,7 +16,7 @@
     "properties": {
       "description": "SearchSpfx",
       "title": "",
-      "query": "*",
+      "query": "Max Goss",
       "template": "DefaultTemplate",
       "maxResults": 10,
       "sorting": "",
